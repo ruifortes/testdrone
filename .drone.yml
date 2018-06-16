@@ -2,5 +2,14 @@ pipeline:
   build:
     image: node:latest
     commands:
-      - npm install
-      - npm run test
+    - npm install
+    - npm run test
+  docker:
+    image: plugins/docker
+    repo: rsf71/dronetest
+    tags: latest
+    secrets: [ docker_username, docker_password ]
+    # publish:
+    #   image: plugins/npm
+    #   when:
+    #     branch: master

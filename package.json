@@ -5,5 +5,8 @@
   "main": "index.js",
   "repository": "https://github.com/ruifortes/testdrone.git",
   "author": "Rui Fortes <ruisantosfortes@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "node-tap": "^1.0.0"
+  }
 }
