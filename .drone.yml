@@ -3,17 +3,18 @@ pipeline:
     image: drillster/drone-volume-cache
     restore: true
     mount:
-      - ./node_modules
-      - ./npm-packages-offline-cache
+    - ./node_modules
+    - ./npm-packages-offline-cache
     volumes:
       - /tmp/cache:/cache
   build:
     image: node:10-alpine
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+    - /var/run/docker.sock:/var/run/docker.sock
     commands:
-       - yarn docker.build
-       - docker push rsf71/testdrone
+    - yarn install --prefer-offline
+   - yarn docker.build
+   - docker push rsf71/testdrone
   # docker:
   #   image: plugins/docker
   #   repo: rsf71/dronetest
