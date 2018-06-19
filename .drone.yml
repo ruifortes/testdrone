@@ -7,20 +7,22 @@ pipeline:
       - ./npm-packages-offline-cache
     volumes:
       - /tmp/cache:/cache
-  # build:
-  #   image: node:10-alpine
-  #   commands:
-  #   - yarn install
-  #   - yarn test
-  docker:
-    image: plugins/docker
-    repo: rsf71/dronetest
-    tags: latest
-    secrets: [docker_username, docker_password]
-    # publish:
-    #   image: plugins/npm
-    #   when:
-    #     branch: master
+  build:
+    image: docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+       - yarn docker.build
+       - docker push rsf71/testdrone
+  # docker:
+  #   image: plugins/docker
+  #   repo: rsf71/dronetest
+  #   tags: latest
+  #   secrets: [docker_username, docker_password]
+  # publish:
+  #   image: plugins/npm
+  #   when:
+  #     branch: master
   rebuild-cache:
     image: drillster/drone-volume-cache
     rebuild: true
