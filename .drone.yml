@@ -8,14 +8,21 @@ pipeline:
     volumes:
       - /tmp/cache:/cache
   build:
-    image: node:10-alpine
+    image: docker
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/bin/jq:/usr/bin/jq
     commands:
-    # - yarn install --prefer-offline
-    - yarn global add cross-var
-    - yarn docker.build
-    - docker push rsf71/testdrone
+    # - yarn global add cross-var
+    # - yarn docker.build
+    # - export IMAGENAME=$(jq '.config.imageRepo + ":" + .version' < package.json)
+    # - docker image build -t $IMAGENAME .
+    - export IMAGE-REPO=$(jq '.config.imageRepo' < package.json)
+    - export IMAGE-TAG=$(jq '.version' < package.json)
+    - docker image build -t $IMAGE-REPO:$IMAGE-TAG .
+    - docker image tag $IMAGE-REPO:$IMAGE-TAG $IMAGE-REPO:latest
+    - docker push $IMAGE-REPO:$IMAGE-TAG
+    - docker push $IMAGE-REPO:latest
   # docker:
   #   image: plugins/docker
   #   repo: rsf71/dronetest
