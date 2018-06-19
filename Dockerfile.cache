@@ -1,0 +1,11 @@
+FROM node:10-alpine as install
+###########################################
+
+ARG HOME=${HOME:-/home/node}
+
+RUN mkdir -p $HOME/app
+WORKDIR $HOME/app
+
+COPY ./npm-packages-offline-cache ./npm-packages-offline-cache
+COPY package.json server/package.json yarn.lock .yarnrc ./
+

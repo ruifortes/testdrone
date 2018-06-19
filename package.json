@@ -6,7 +6,29 @@
   "repository": "https://github.com/ruifortes/testdrone.git",
   "author": "Rui Fortes <ruisantosfortes@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "installxxx": "(cd client; yarn install --prefer-offline) && (cd server; yarn install --prefer-offline)",
+    "test": "echo 0"
+  },
   "devDependencies": {
-    "node-tap": "^1.0.0"
-  }
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.51",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.51",
+    "@babel/plugin-syntax-import-meta": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
+    "babel-loader": "^8.0.0-beta.3",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "favicons-webpack-plugin": "^0.0.9",
+    "html-webpack-plugin": "^4.0.0-alpha",
+    "node-tap": "^1.0.0",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8"
+  },
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ]
 }
