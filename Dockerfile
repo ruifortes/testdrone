@@ -4,18 +4,17 @@ FROM node:10-alpine as install
 
 ARG HOME=${HOME:-/home/node}
 
-RUN mkdir -p $HOME/app
+RUN mkdir -p $HOME/app/npm-packages-offline-cache
 WORKDIR $HOME/app
 # RUN mkdir -p client server
 
 # && chgrp -R 0 $HOME/app \
 # && chmod -R g+rwX $HOME/app
 
-
 COPY npm-packages-offline-cache npm-packages-offline-cache/
 COPY package.json client/package.json server/package.json yarn.lock .yarnrc ./
 
-RUN yarn install --offline
+RUN yarn install --prefer-offline
 RUN rm -rf npm-packages-offline-cache
 
 ###########################################

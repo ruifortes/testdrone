@@ -1,4 +1,9 @@
 pipeline:
+  cache:
+    mount:
+      - node_modules
+      - npm-packages-offline-cache
+      - .git
   # build:
   #   image: node:10-alpine
   #   commands:
