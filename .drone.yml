@@ -1,9 +1,12 @@
 pipeline:
-  cache:
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
     mount:
-      - node_modules
-      - npm-packages-offline-cache
-      - .git
+      - ./node_modules
+      - ./npm-packages-offline-cache
+    volumes:
+      - /tmp/cache:/cache
   # build:
   #   image: node:10-alpine
   #   commands:
@@ -18,3 +21,11 @@ pipeline:
     #   image: plugins/npm
     #   when:
     #     branch: master
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      - ./node_modules
+      - ./npm-packages-offline-cache
+    volumes:
+      - /tmp/cache:/cache
