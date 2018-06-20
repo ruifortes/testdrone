@@ -21,6 +21,7 @@ pipeline:
     - docker image tag $IMAGE_REPO:$IMAGE_TAG $IMAGE_REPO:latest
     - docker push $IMAGE_REPO:$IMAGE_TAG
     - docker push $IMAGE_REPO:latest
+    secrets: [docker_username, docker_password]
   # docker:
   #   image: plugins/docker
   #   repo: rsf71/dronetest
