@@ -14,19 +14,13 @@ pipeline:
     - /var/run/docker.sock:/var/run/docker.sock
     # - /usr/bin/jq:/usr/bin/jq
     commands:
-    # - yarn global add cross-var
-    # - yarn docker.build
-    # - export IMAGENAME=$(jq '.config.imageRepo + ":" + .version' < package.json)
-    # - docker image build -t $IMAGENAME .
-    
-    - echo $(jq '.config.imageRepo' < package.json)
-    - export IMAGE_REPO=$(jq '.config.imageRepo' < package.json)
-    - export IMAGE_TAG=$(jq '.version' < package.json)
-    - echo $IMAGE_REPO:$IMAGE_TAG
-    # - docker image build -t $IMAGE_REPO:$IMAGE_TAG .
-    # - docker image tag $IMAGE_REPO:$IMAGE_TAG $IMAGE_REPO:latest
-    # - docker push $IMAGE_REPO:$IMAGE_TAG
-    # - docker push $IMAGE_REPO:latest
+    - echo $(jq -r '.config.imageRepo' < package.json)
+    - export IMAGE_REPO=$(jq -r '.config.imageRepo' < package.json)
+    - export IMAGE_TAG=$(jq -r '.version' < package.json)
+    - docker image build -t $IMAGE_REPO:$IMAGE_TAG .
+    - docker image tag $IMAGE_REPO:$IMAGE_TAG $IMAGE_REPO:latest
+    - docker push $IMAGE_REPO:$IMAGE_TAG
+    - docker push $IMAGE_REPO:latest
   # docker:
   #   image: plugins/docker
   #   repo: rsf71/dronetest
