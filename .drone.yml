@@ -8,11 +8,10 @@ pipeline:
     volumes:
       - /tmp/cache:/cache
   build:
-    image: docker
+    image: rsf71/docker
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     # - /usr/bin/jq:/usr/bin/jq
-    - ~/Documents/WEBDEV/drone/jq-linux64:/usr/bin/jq
     commands:
     - echo $(jq -h)
     # - yarn global add cross-var
