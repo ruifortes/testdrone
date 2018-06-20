@@ -1,6 +1,6 @@
 {
   "name": "testdrone",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Test drone.io",
   "main": "index.js",
   "repository": "https://github.com/ruifortes/testdrone.git",

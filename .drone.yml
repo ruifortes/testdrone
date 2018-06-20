@@ -10,6 +10,7 @@ pipeline:
       - /tmp/cache:/cache
   build:
     image: rsf71/docker
+    pull: true
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     # - /usr/bin/jq:/usr/bin/jq
