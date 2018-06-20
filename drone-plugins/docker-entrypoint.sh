@@ -1,4 +1,10 @@
 #!/bin/sh
 set -e
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+export IMAGE_REPO=$(jq -r '.config.imageRepo' < package.json)
+export IMAGE_TAG=$(jq -r '.version' < package.json)
+docker image build -t $IMAGE_REPO:$IMAGE_TAG .
+docker image tag $IMAGE_REPO:$IMAGE_TAG $IMAGE_REPO:latest
+docker push $IMAGE_REPO:$IMAGE_TAG
+docker push $IMAGE_REPO:latest
 exec "$@"
