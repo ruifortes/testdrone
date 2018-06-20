@@ -14,6 +14,7 @@ pipeline:
     - /var/run/docker.sock:/var/run/docker.sock
     # - /usr/bin/jq:/usr/bin/jq
     commands:
+    - docker login --username=maryatdocker --email=mary@docker.com
     - echo $(jq -r '.config.imageRepo' < package.json)
     - export IMAGE_REPO=$(jq -r '.config.imageRepo' < package.json)
     - export IMAGE_TAG=$(jq -r '.version' < package.json)
