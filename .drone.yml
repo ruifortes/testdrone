@@ -3,6 +3,7 @@ pipeline:
     image: drillster/drone-volume-cache
     restore: true
     mount:
+    - ./.git
     - ./node_modules
     - ./npm-packages-offline-cache
     volumes:
@@ -19,12 +20,12 @@ pipeline:
     # - docker image build -t $IMAGENAME .
     
     - echo $(jq '.config.imageRepo' < package.json)
-    - export IMAGE-REPO=$(jq '.config.imageRepo' < package.json)
-    - export IMAGE-TAG=$(jq '.version' < package.json)
-    - docker image build -t $IMAGE-REPO:$IMAGE-TAG .
-    - docker image tag $IMAGE-REPO:$IMAGE-TAG $IMAGE-REPO:latest
-    - docker push $IMAGE-REPO:$IMAGE-TAG
-    - docker push $IMAGE-REPO:latest
+    - export IMAGE_REPO=$(jq '.config.imageRepo' < package.json)
+    - export IMAGE_TAG=$(jq '.version' < package.json)
+    - docker image build -t $IMAGE_REPO:$IMAGE_TAG .
+    - docker image tag $IMAGE_REPO:$IMAGE_TAG $IMAGE_REPO:latest
+    - docker push $IMAGE_REPO:$IMAGE_TAG
+    - docker push $IMAGE_REPO:latest
   # docker:
   #   image: plugins/docker
   #   repo: rsf71/dronetest
@@ -38,7 +39,8 @@ pipeline:
     image: drillster/drone-volume-cache
     rebuild: true
     mount:
-      - ./node_modules
-      - ./npm-packages-offline-cache
+    - ./.git
+    - ./node_modules
+    - ./npm-packages-offline-cache
     volumes:
-      - /tmp/cache:/cache
+    - /tmp/cache:/cache
