@@ -1,0 +1,85 @@
+# kind: PersistentVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: ${NAME}
+#   labels:
+#     name: ${NAME}
+# spec:
+#   accessModes:
+#   - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ${NAME}
+  labels:
+    name: ${NAME}
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    name: ${NAME}
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: ${NAME}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: ${NAME}
+      labels:
+        name: ${NAME}
+    spec:
+      securityContext:
+        fsGroup: 1000
+      # volumes:
+      #   - name: ${NAME}
+      #     persistentVolumeClaim:
+      #       claimName: ralpi-assets  
+      volumes:
+        - name: storage-credentials
+          secret:
+            secretName: storage-auth-credentials
+            items:
+              - key: credentials
+                path: storage-credentials.json         
+      containers:
+        - name: ${NAME}
+          image: gcr.io/friendly-gamma-190815/ralpi_site
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - SYS_ADMIN
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: storage-credentials
+              mountPath: /auth
+              readOnly: true
+          env:
+            - name: MYSQL_HOST
+              value: ralpi-db
+            - name: MYSQL_DATABASE
+              value: ralpi_mdb
+            - name: MYSQL_USER
+              value: ralpi_admin
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ralpi-secret
+                  key: mysql-password
+            # - name: MYSQL_ROOT_PASSWORD
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: ralpi-secret
+            #       key: mysql-password

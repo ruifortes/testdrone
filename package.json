@@ -1,6 +1,6 @@
 {
-  "name": "testdrone",
-  "version": "1.0.23",
+  "name": "myapp",
+  "version": "1.2.0",
   "description": "Test drone.io",
   "main": "index.js",
   "repository": "https://github.com/ruifortes/testdrone.git",
@@ -10,9 +10,12 @@
     "imageRepo": "rsf71/dronetest"
   },
   "scripts": {
-    "docker.build": "cross-var docker image build -t $npm_package_config_imageRepo:$npm_package_version .",
+    "start": "(cd server; yarn start)",
+    "docker.build": "cross-var docker-compose build",
+    "docker.build.server": "cross-var docker image build -t $npm_package_config_imageRepo:$npm_package_version .",
+    "postdocker.build.server": "cross-var docker image tag $npm_package_config_imageRepo:$npm_package_version $npm_package_config_imageRepo:latest",
+    "docker.build.db": "cross-var docker image build -t $npm_package_config_imageRepo:$npm_package_version .",
     "docker.tag": "cross-var docker image tag $npm_package_config_imageRepo:$npm_package_version $npm_package_config_imageRepo:latest",
-    "postdocker.build": "yarn run docker.tag",
     "test": "echo 0"
   },
   "devDependencies": {

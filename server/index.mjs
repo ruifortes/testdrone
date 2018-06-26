@@ -1,7 +1,8 @@
 import Path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
-import mysql from 'mysql'
+// import mysql from 'mysql'
+import {router as arangoRouter} from './arango'
 
 // const DIRNAME = (typeof __dirname !== 'undefined') ? __dirname : Path.dirname(new URL(import.meta.url).pathname)
 
@@ -23,6 +24,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.text())
 
 app.use('/', express.static(Path.resolve(DIRNAME, '../client/build')))
+
+app.use('/api' ,arangoRouter)
 
 app.get('/test', (req, res) => {
   res.json({aaa: 123})

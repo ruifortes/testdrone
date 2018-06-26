@@ -1,0 +1,4 @@
+FROM arangodb/arangodb:3.3.10
+
+ADD data/dump.tar.gz /docker-entrypoint-initdb.d/dumps/test
+
