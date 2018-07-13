@@ -24,11 +24,11 @@ pipeline:
   #   volumes:
   #   - /var/run/docker.sock:/var/run/docker.sock
   #   secrets: [docker_username, docker_password]
-  # docker:
-  #   image: plugins/docker
-  #   repo: rsf71/dronetest
-  #   tags: latest
-  #   secrets: [docker_username, docker_password]
+  docker:
+    image: plugins/docker
+    repo: rsf71/dronetest
+    auto_tag: true
+    secrets: [docker_username, docker_password]
   # publish:
   #   image: plugins/npm
   #   when:
