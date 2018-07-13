@@ -1,6 +1,6 @@
 {
   "name": "myapp",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Test drone.io",
   "main": "index.js",
   "repository": "https://github.com/ruifortes/testdrone.git",
