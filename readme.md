@@ -1,4 +1,5 @@
-# Drone.io test repo
+
+# Drone.io test repo [![](http://rsf-drone.ddns.net/api/badges/ruifortes/testdrone/status.svg?branch=master)](http://rsf-drone.ddns.net/ruifortes/testdrone)
 
 
 ## docker

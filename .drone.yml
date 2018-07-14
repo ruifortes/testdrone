@@ -23,6 +23,7 @@ pipeline:
     storage_path: /drone/docker
     secrets: [docker_username, docker_password]
     when:
+      event: [push, tag]
       branch: master
   push-db:
     image: plugins/docker
