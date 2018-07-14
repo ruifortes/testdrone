@@ -9,13 +9,13 @@ pipeline:
     - ./npm-packages-offline-cache
     volumes:
       - /tmp/cache:/cache
-  docker:
-    image: rsf71/docker
-    privileged: true
-    pull: true
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    secrets: [docker_username, docker_password]
+  # docker:
+  #   image: rsf71/docker
+  #   privileged: true
+  #   pull: true
+  #   volumes:
+  #   - /var/run/docker.sock:/var/run/docker.sock
+  #   secrets: [docker_username, docker_password]
   # gcr:
   #   image: rsf71/docker
   #   privileged: true

@@ -11,13 +11,13 @@ WORKDIR $HOME/app
 # && chgrp -R 0 $HOME/app \
 # && chmod -R g+rwX $HOME/app
 
-COPY npm-packages-offline-cache npm-packages-offline-cache
+# COPY npm-packages-offline-cache npm-packages-offline-cache
 COPY package.json yarn.lock .yarnrc ./
 COPY server/package.json ./server/
 COPY client/package.json ./client/
 
-RUN yarn install --prefer-offline
-RUN rm -rf npm-packages-offline-cache
+# RUN yarn install --prefer-offline
+# RUN rm -rf npm-packages-offline-cache
 
 ###########################################
 FROM node:10-alpine as app
