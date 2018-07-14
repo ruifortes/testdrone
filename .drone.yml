@@ -4,7 +4,6 @@ pipeline:
     restore: true
     privileged: true
     mount:
-      - /drone/docker
       - ./.git
       - ./node_modules
       - ./npm-packages-offline-cache
@@ -41,7 +40,6 @@ pipeline:
     privileged: true
     rebuild: true
     mount:
-      # - /drone/docker
       - ./.git
       - ./node_modules
       - ./npm-packages-offline-cache
