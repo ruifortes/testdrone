@@ -1,0 +1,49 @@
+pipeline:
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    privileged: true
+    mount:
+      - /drone/docker
+      - ./.git
+      - ./node_modules
+      - ./npm-packages-offline-cache
+    volumes:
+      - /tmp/cache:/cache
+  install:
+    image: node:10-alpine
+    privileged: true
+    commands:
+      - yarn install --prefer-offline
+      - yarn test
+  push-server:
+    image: plugins/docker
+    repo: rsf71/dronetest-server
+    dockerfile: Dockerfile-server
+    auto_tag: true
+    storage_path: /drone/docker
+    secrets: [docker_username, docker_password]
+    when:
+      event: tag
+      branch: master
+  push-db:
+    image: plugins/docker
+    repo: rsf71/dronetest-db
+    dockerfile: Dockerfile-db
+    auto_tag: true
+    storage_path: /drone/docker
+    secrets: [docker_username, docker_password]
+    when:
+      event: tag
+      branch: master
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    privileged: true
+    rebuild: true
+    mount:
+      - /drone/docker
+      - ./.git
+      - ./node_modules
+      - ./npm-packages-offline-cache
+    volumes:
+      - /tmp/cache:/cache

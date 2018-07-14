@@ -1,0 +1,45 @@
+###########################################
+FROM node:10-alpine as install
+###########################################
+
+ARG HOME=${HOME:-/home/node}
+
+RUN mkdir -p $HOME/app/npm-packages-offline-cache
+WORKDIR $HOME/app
+# RUN mkdir -p client server
+
+# && chgrp -R 0 $HOME/app \
+# && chmod -R g+rwX $HOME/app
+
+COPY npm-packages-offline-cache npm-packages-offline-cache
+
+RUN yarn install --prefer-offline
+RUN rm -rf npm-packages-offline-cache
+
+###########################################
+FROM node:10-alpine as app
+###########################################
+
+ARG HOME=${HOME:-/home/node}
+
+RUN mkdir -p $HOME/app
+# && chgrp -R 0 $HOME/app \
+# && chmod -R g+rwX $HOME/app
+
+WORKDIR $HOME/app
+
+COPY node_modules ./node_modules
+
+COPY package.json yarn.lock .yarnrc ./
+COPY server/package.json ./server/
+COPY client/package.json ./client/
+
+COPY client/build ./client/build
+COPY server ./server
+
+WORKDIR ./server
+
+# VOLUME $HOME/app/cache
+ENTRYPOINT ["yarn", "start"]
+
+EXPOSE 8080

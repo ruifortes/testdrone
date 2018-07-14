@@ -16,7 +16,8 @@
     "postdocker.build.server": "cross-var docker image tag $npm_package_config_imageRepo:$npm_package_version $npm_package_config_imageRepo:latest",
     "docker.build.db": "cross-var docker image build -t $npm_package_config_imageRepo:$npm_package_version .",
     "docker.tag": "cross-var docker image tag $npm_package_config_imageRepo:$npm_package_version $npm_package_config_imageRepo:latest",
-    "test": "echo 0"
+    "testx": "echo 0",
+    "test": "echo 'no test stript available'"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",
