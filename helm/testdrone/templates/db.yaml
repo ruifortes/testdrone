@@ -1,0 +1,37 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{.Release.Name}}-db
+  labels:
+    name: {{.Release.Name}}-db
+spec:
+  type: LoadBalancer
+  ports:
+    - name: arango
+      protocol: TCP
+      port: 8529
+      targetPort: 8529
+  selector:
+    name: {{.Release.Name}}-db
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: ${NAME}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: {{.Release.Name}}-db
+      labels: 
+        name: {{.Release.Name}}-db
+    spec:
+     containers:
+        - name: {{.Release.Name}}-db
+          image: rsf71/arangodb
+          ports:
+           - containerPort: 8529
+          env:
+          - name: ARANGO_ROOT_PASSWORD
+            value: password

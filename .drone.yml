@@ -26,7 +26,13 @@ pipeline:
   #   secrets: [docker_username, docker_password]
   docker:
     image: plugins/docker
-    repo: rsf71/dronetest
+    repo: rsf71/dronetest-server
+    auto_tag: true
+    secrets: [docker_username, docker_password]
+  docker:
+    image: plugins/docker
+    repo: rsf71/dronetest-server
+    dockerfile: Dockerfile.arangodb
     auto_tag: true
     secrets: [docker_username, docker_password]
   # publish:
