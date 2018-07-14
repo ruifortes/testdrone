@@ -23,7 +23,6 @@ pipeline:
     storage_path: /drone/docker
     secrets: [docker_username, docker_password]
     when:
-      event: tag
       branch: master
   push-db:
     image: plugins/docker
@@ -33,7 +32,6 @@ pipeline:
     storage_path: /drone/docker
     secrets: [docker_username, docker_password]
     when:
-      event: tag
       branch: master
   rebuild-cache:
     image: drillster/drone-volume-cache

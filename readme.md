@@ -1,6 +1,5 @@
 # Drone.io test repo
 
-zzzzzz
 
 ## docker
 
