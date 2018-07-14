@@ -4,7 +4,7 @@ pipeline:
     restore: true
     privileged: true
     mount:
-      - /drone/docker
+      # - /drone/docker
       - ./.git
       - ./node_modules
       - ./npm-packages-offline-cache
@@ -23,9 +23,9 @@ pipeline:
     auto_tag: true
     storage_path: /drone/docker
     secrets: [docker_username, docker_password]
-    when:
-      event: tag
-      branch: master
+    # when:
+    #   event: tag
+    #   branch: master
   push-db:
     image: plugins/docker
     repo: rsf71/dronetest-db
@@ -33,15 +33,15 @@ pipeline:
     auto_tag: true
     storage_path: /drone/docker
     secrets: [docker_username, docker_password]
-    when:
-      event: tag
-      branch: master
+    # when:
+    #   event: tag
+    #   branch: master
   rebuild-cache:
     image: drillster/drone-volume-cache
     privileged: true
     rebuild: true
     mount:
-      - /drone/docker
+      # - /drone/docker
       - ./.git
       - ./node_modules
       - ./npm-packages-offline-cache
