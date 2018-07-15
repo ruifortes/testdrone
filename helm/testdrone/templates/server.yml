@@ -2,39 +2,38 @@
 # kind: Service
 # apiVersion: v1
 # metadata:
-#   name: {{.Release.Name}}-db
-#   labels:
-#     name: {{.Release.Name}}-db
+#   name: {{.Release.Name}}-server
 # spec:
 #   type: LoadBalancer
 #   ports:
-#     - name: arango
-#       protocol: TCP
-#       port: 8529
-#       targetPort: 8529
+#     - name: http
+#       port: 80
+#       targetPort: 8080
 #   selector:
-#     name: {{.Release.Name}}-db
+#     name: {{.Release.Name}}-server
 ---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: {{.Release.Name}}-db
+  name: {{.Release.Name}}-server
 spec:
   selector:                                                                                                                                     
     matchLabels:                                                                                                                                
-      name: {{.Release.Name}}-db
+      name: {{.Release.Name}}-server  
   replicas: 1
   template:
     metadata:
-      name: {{.Release.Name}}-db
-      labels: 
-        name: {{.Release.Name}}-db
+      name: {{.Release.Name}}-server
+      labels:
+        name: {{.Release.Name}}-server
     spec:
-     containers:
-        - name: {{.Release.Name}}-db
-          image: rsf71/dronetest-db
+      containers:
+        - name: {{.Release.Name}}-server
+          image: rsf71/dronetest-server
           ports:
-           - containerPort: 8529
+           - containerPort: 8080  
           env:
+          - name: ARANGODB_HOST
+            value: {{.Release.Name}}-db
           - name: ARANGO_ROOT_PASSWORD
             value: password
