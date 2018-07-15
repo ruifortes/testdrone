@@ -29,7 +29,6 @@ pipeline:
     repo: rsf71/dronetest-db
     dockerfile: Dockerfile-db
     auto_tag: true
-    storage_path: /drone/docker
     secrets: [docker_username, docker_password]
     when:
       branch: master
