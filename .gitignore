@@ -5,3 +5,5 @@ npm-packages-offline-cache
 # !/npm-packages-offline-cache/.gitkeep
 
 ./secrets.env
+
+/!notes.md

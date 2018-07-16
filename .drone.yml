@@ -20,7 +20,7 @@ pipeline:
     repo: rsf71/dronetest-server
     dockerfile: Dockerfile-server
     auto_tag: true
-    storage_path: /drone/docker
+    # storage_path: /drone/docker
     secrets: [docker_username, docker_password]
     when:
       branch: master
@@ -32,6 +32,18 @@ pipeline:
     secrets: [docker_username, docker_password]
     when:
       branch: master
+  kubectl:
+    image: komljen/drone-kubectl-helm
+    secrets: [kubernetes_server, kubernetes_cert, kubernetes_token]
+    kubectl: "get nodes"
+  # helm_deploy:
+  #   image: quay.io/ipedrazas/drone-helm
+  #   skip_tls_verify: true
+  #   chart: ./helm/testdrone
+  #   release: dronetest
+  #   namespace: test
+  #   secrets: [prod_api_server, prod_kubernetes_token]
+  #   debug: true
   rebuild-cache:
     image: drillster/drone-volume-cache
     privileged: true
