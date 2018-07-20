@@ -35,7 +35,7 @@ pipeline:
   kubectl:
     image: komljen/drone-kubectl-helm
     secrets: [kubernetes_server, kubernetes_cert, kubernetes_token]
-    kubectl: "get nodes"
+    helm: upgrade --install --namespace test testdrone helm/testdrone --debug
   # helm_deploy:
   #   image: quay.io/ipedrazas/drone-helm
   #   skip_tls_verify: true

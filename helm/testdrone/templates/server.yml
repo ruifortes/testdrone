@@ -1,16 +1,16 @@
-# ---
-# kind: Service
-# apiVersion: v1
-# metadata:
-#   name: {{.Release.Name}}-server
-# spec:
-#   type: LoadBalancer
-#   ports:
-#     - name: http
-#       port: 80
-#       targetPort: 8080
-#   selector:
-#     name: {{.Release.Name}}-server
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{.Release.Name}}-server
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    name: {{.Release.Name}}-server
 ---
 kind: Deployment
 apiVersion: apps/v1
