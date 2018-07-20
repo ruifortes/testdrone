@@ -16,7 +16,8 @@ pipeline:
       - yarn install --prefer-offline
       - yarn build
       - yarn test
-  push-server:
+  build-server:
+    group: build
     image: plugins/docker
     repo: rsf71/dronetest-server
     dockerfile: Dockerfile-server
@@ -26,22 +27,17 @@ pipeline:
     when:
       branch: master
       event: tag
-  push-db:
+  build-db:
+    group: build
     image: plugins/docker
     repo: rsf71/dronetest-db
     dockerfile: Dockerfile-db
     auto_tag: true
     secrets: [docker_username, docker_password]
-    when:
-      branch: master
-      event: tag
-  kubectl:
+  deploy:
     image: komljen/drone-kubectl-helm
     secrets: [kubernetes_server, kubernetes_cert, kubernetes_token]
     helm: upgrade --install --namespace test testdrone helm/testdrone --debug
-    when:
-      branch: master
-      event: tag
   # helm_deploy:
   #   image: quay.io/ipedrazas/drone-helm
   #   skip_tls_verify: true
