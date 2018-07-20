@@ -40,8 +40,10 @@ COPY --from=install $HOME/app ./
 # COPY --chown=0:0 client/build ./client/build
 # COPY --chown=0:0 server ./server
 
-COPY client/build ./client/build
+COPY client/build ./client
 COPY server ./server
+
+RUN yarn build
 
 WORKDIR ./server
 

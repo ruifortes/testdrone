@@ -14,6 +14,7 @@ pipeline:
     privileged: true
     commands:
       - yarn install --prefer-offline
+      - yarn build
       - yarn test
   push-server:
     image: plugins/docker
@@ -24,6 +25,7 @@ pipeline:
     secrets: [docker_username, docker_password]
     when:
       branch: master
+      event: tag
   push-db:
     image: plugins/docker
     repo: rsf71/dronetest-db
@@ -32,10 +34,14 @@ pipeline:
     secrets: [docker_username, docker_password]
     when:
       branch: master
+      event: tag
   kubectl:
     image: komljen/drone-kubectl-helm
     secrets: [kubernetes_server, kubernetes_cert, kubernetes_token]
     helm: upgrade --install --namespace test testdrone helm/testdrone --debug
+    when:
+      branch: master
+      event: tag
   # helm_deploy:
   #   image: quay.io/ipedrazas/drone-helm
   #   skip_tls_verify: true

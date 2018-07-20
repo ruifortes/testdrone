@@ -7,7 +7,7 @@
     "build": "webpack --progress --colors --display-error-details",
     "build.watch": "webpack --progress --colors --display-error-details --env.dev --watch -d"
   },
-  "dependenciesx": {
+  "dependencies": {
     "a": "^2.1.2",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.4.1",
