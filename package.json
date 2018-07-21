@@ -10,7 +10,7 @@
     "imageRepo": "rsf71/dronetest"
   },
   "scripts": {
-    "xxx": "wewefwefwef",
+    "xxx": "aaasasasas",
     "start": "(cd server; yarn start)",
     "build": "(cd client; yarn build)",
     "docker.build": "cross-var docker-compose build",
