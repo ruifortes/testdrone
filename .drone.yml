@@ -48,7 +48,7 @@ pipeline:
     #   - TAG=$$TAG
     helm: upgrade --install --set tag=${DRONE_TAG} --namespace test testdrone helm/testdrone --debug
     when:
-      branch: master
+      # branch: master
       event: tag
   # helm_deploy:
   #   image: quay.io/ipedrazas/drone-helm
