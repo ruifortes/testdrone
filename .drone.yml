@@ -39,6 +39,8 @@ pipeline:
       - latest
       - ${DRONE_TAG}
     secrets: [docker_username, docker_password]
+    when:
+      event: tag
   deploy:
     image: komljen/drone-kubectl-helm
     secrets: [kubernetes_server, kubernetes_cert, kubernetes_token]
