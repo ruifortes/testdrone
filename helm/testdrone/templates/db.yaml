@@ -32,7 +32,7 @@ spec:
     spec:
      containers:
         - name: {{.Release.Name}}-db
-          image: rsf71/dronetest-db
+          image: rsf71/dronetest-db:{{.Values.tag}}
           ports:
            - containerPort: 8529
           env:
