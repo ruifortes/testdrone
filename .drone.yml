@@ -21,26 +21,33 @@ pipeline:
     image: plugins/docker
     repo: rsf71/dronetest-server
     dockerfile: Dockerfile-server
-    tag: $$TAG
+    tag:
+      - latest
+      - ${DRONE_TAG}
     # auto_tag: true
     # storage_path: /drone/docker
     secrets: [docker_username, docker_password]
+    when:
+      event: tag
   build-db:
     # group: build
     image: plugins/docker
     repo: rsf71/dronetest-db
     dockerfile: Dockerfile-db
     # auto_tag: true
-    tag: $$TAG
+    tag:
+      - latest
+      - ${DRONE_TAG}
     secrets: [docker_username, docker_password]
   deploy:
     image: komljen/drone-kubectl-helm
     secrets: [kubernetes_server, kubernetes_cert, kubernetes_token]
     # environment:
     #   - TAG=$$TAG
-    helm: upgrade --install --set tag=$$TAG --namespace test testdrone helm/testdrone --debug
+    helm: upgrade --install --set tag=${DRONE_TAG} --namespace test testdrone helm/testdrone --debug
     when:
       branch: master
+      event: tag
   # helm_deploy:
   #   image: quay.io/ipedrazas/drone-helm
   #   skip_tls_verify: true
