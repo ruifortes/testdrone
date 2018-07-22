@@ -28,7 +28,7 @@ pipeline:
     # storage_path: /drone/docker
     secrets: [docker_username, docker_password]
     when:
-      event: [push, pull_request, tag]
+      event: tag
   build-db:
     group: build
     image: plugins/docker
@@ -40,7 +40,7 @@ pipeline:
       - ${DRONE_TAG}
     secrets: [docker_username, docker_password]
     when:
-      event: [push, pull_request, tag]
+      event: tag
   deploy:
     image: komljen/drone-kubectl-helm
     secrets: [kubernetes_server, kubernetes_cert, kubernetes_token]
