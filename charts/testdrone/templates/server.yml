@@ -36,4 +36,7 @@ spec:
           - name: ARANGODB_HOST
             value: {{.Release.Name}}-db
           - name: ARANGO_ROOT_PASSWORD
-            value: password
+            valueFrom:
+              secretKeyRef:
+                name: app-secret
+                key: arango-root-password

@@ -61,9 +61,13 @@
   `drone secret add ruifortes/testdrone kubernetes_token $KUBERNETES_TOKEN`  
   `drone secret add ruifortes/testdrone kubernetes_cert $KUBERNETES_CERT`  
 
-### Deployment
+### Add secrets to kubernetes namespace
 
-`drone deploy ruifortes/testdrone <build> production`
+  `kubectl create secret generic app-secret --namespace test --from-literal=arango-root-paasword=...`
+  
+  `drone deploy ruifortes/testdrone <build> production`
+
+
 
 ## docker
 
@@ -74,6 +78,9 @@
   docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v /home/rsf/Documents/WEBDEV/tmp/testdrone/tools/jq-linux64:/usr/bin/jq node:10-alpine sh
   
 ## ArangoDB
+
+`kubectl get pods --namespace test | grep testdrone-db | awk '{print $1}'`
+`kubectl port-forward --namespace test $(kubectl get pods --namespace test | grep testdrone-db | awk '{print $1}') 8529`
 
 docker run -p 8529:8529 -e ARANGO_ROOT_PASSWORD=... arangodb/arangodb:3.3.10
 
