@@ -3,12 +3,13 @@ import arango from 'arangojs'
 const Database = arango.Database
 const aql = arango.aql
 
+const {ARANGODB_HOST, ARANGO_ROOT_PASSWORD} = process.env
 const db = new Database({
-  url: `http://${process.env.ARANGODB_HOST || 'localhost'}:8529`
+  url: `http://${ARANGODB_HOST || 'localhost'}:8529`
 })
 
 db.useDatabase('test')
-db.useBasicAuth('root', 'password')
+db.useBasicAuth('root', ARANGO_ROOT_PASSWORD)
 const collection = db.collection('countries')
 
 import express from 'express'
