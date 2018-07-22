@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 class App extends PureComponent {
   render() {
     return (
-      <div>drone test app version 1.3.6</div>
+      <div>drone test app version 1.3.7</div>
     )
   }
 }
