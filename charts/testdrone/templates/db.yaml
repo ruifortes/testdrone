@@ -1,19 +1,19 @@
-# ---
-# kind: Service
-# apiVersion: v1
-# metadata:
-#   name: {{.Release.Name}}-db
-#   labels:
-#     name: {{.Release.Name}}-db
-# spec:
-#   type: LoadBalancer
-#   ports:
-#     - name: arango
-#       protocol: TCP
-#       port: 8529
-#       targetPort: 8529
-#   selector:
-#     name: {{.Release.Name}}-db
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{.Release.Name}}-db
+  labels:
+    name: {{.Release.Name}}-db
+spec:
+  type: LoadBalancer
+  ports:
+    - name: arango
+      protocol: TCP
+      port: 8529
+      targetPort: 8529
+  selector:
+    name: {{.Release.Name}}-db
 ---
 kind: Deployment
 apiVersion: apps/v1

@@ -63,7 +63,7 @@
 
 ### Add secrets to kubernetes namespace
 
-  `kubectl create secret generic app-secret --namespace test --from-literal=arango-root-paasword=...`
+  `kubectl create secret generic app-secret --namespace test --from-literal=arango-root-password=...`
   
   `drone deploy ruifortes/testdrone <build> production`
 
@@ -89,7 +89,7 @@ docker run -d -p 8529:8529 -e ARANGO_ROOT_PASSWORD=... rsf71/arangodb
 
 curl https://raw.githubusercontent.com/mledoze/countries/master/countries.json > countries.json
 
-`docker run -d -p 8529:8529 -e ARANGO_ROOT_PASSWORD=password rsf71/arangodb`
+`docker run -d -p 8529:8529 -e ARANGO_ROOT_PASSWORD=$ARANGO_ROOT_PASSWORD rsf71/dronetest-db`
 
 `arangoimp --server.database test --file "countries.json" --collection countries --translate "cca3=_key" --create-collection true`
 

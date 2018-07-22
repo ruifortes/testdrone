@@ -16,6 +16,8 @@ pipeline:
       - yarn install --prefer-offline
       - yarn build
       - yarn test
+    when:
+      event: [push, pull_request, tag]
   build-server:
     group: build
     image: plugins/docker
