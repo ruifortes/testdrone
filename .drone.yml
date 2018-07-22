@@ -17,7 +17,7 @@ pipeline:
       - yarn build
       - yarn test
   build-server:
-    # group: build
+    group: build
     image: plugins/docker
     repo: rsf71/dronetest-server
     dockerfile: Dockerfile-server
@@ -28,9 +28,9 @@ pipeline:
     # storage_path: /drone/docker
     secrets: [docker_username, docker_password]
     when:
-      event: tag
+      event: [push, pull_request, tag]
   build-db:
-    # group: build
+    group: build
     image: plugins/docker
     repo: rsf71/dronetest-db
     dockerfile: Dockerfile-db
@@ -40,13 +40,13 @@ pipeline:
       - ${DRONE_TAG}
     secrets: [docker_username, docker_password]
     when:
-      event: tag
+      event: [push, pull_request, tag]
   deploy:
     image: komljen/drone-kubectl-helm
     secrets: [kubernetes_server, kubernetes_cert, kubernetes_token]
     # environment:
     #   - TAG=$$TAG
-    helm: upgrade --install --set tag=${DRONE_TAG} --namespace test testdrone helm/testdrone --debug
+    helm: upgrade --install --set tag=${DRONE_TAG} --namespace test testdrone charts/testdrone --debug
     when:
       event: deployment
   # helm_deploy:

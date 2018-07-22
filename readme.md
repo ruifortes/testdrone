@@ -61,6 +61,10 @@
   `drone secret add ruifortes/testdrone kubernetes_token $KUBERNETES_TOKEN`  
   `drone secret add ruifortes/testdrone kubernetes_cert $KUBERNETES_CERT`  
 
+### Deployment
+
+`drone deploy ruifortes/testdrone <build> production`
+
 ## docker
 
   docker build -t testdrone .
