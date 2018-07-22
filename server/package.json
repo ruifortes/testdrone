@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node --experimental-modules index.mjs",
+    "start.debug": "node --experimental-modules --inspect-brk index.mjs",
     "build": "webpack --progress --colors --display-error-details"
   },
   "dependencies": {
