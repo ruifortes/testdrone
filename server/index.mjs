@@ -28,7 +28,7 @@ app.use('/', express.static(Path.resolve(DIRNAME, '../client/build')))
 app.use('/api' ,arangoRouter)
 
 app.get('/test', (req, res) => {
-  res.json({version: '1.3.5'})
+  res.json({version: '1.3.6'})
 })
 
 // app.get('/test', (req, res) => {
