@@ -79,7 +79,6 @@
   
 ## ArangoDB
 
-`kubectl get pods --namespace test | grep testdrone-db | awk '{print $1}'`
 `kubectl port-forward --namespace test $(kubectl get pods --namespace test | grep testdrone-db | awk '{print $1}') 8529`
 
 docker run -p 8529:8529 -e ARANGO_ROOT_PASSWORD=... arangodb/arangodb:3.3.10
