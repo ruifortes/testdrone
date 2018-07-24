@@ -8,7 +8,14 @@
   `export DRONE_SERVER=http://rsfdrone-github.ddns.net`  
   `export DRONE_TOKEN=paste-token-here`
   
-## Create drone pipeline (.drone.yml)  
+## Create drone pipeline (.drone.yml)
+
+### Installing dependencies
+
+  add `apk add --no-cache git openssh-client ca-certificates` command in install step
+  `drone secrets add ruifortes/testdrone SSH_KEY @/home/rsf/.ssh/id_rsa`
+  `drone secrets add ruifortes/testdrone SSH_KEY ${cat ~/.ssh/id_rsa}`
+  `drone secrets add ruifortes/testdrone SSH_KEY ${cat /home/rsf/.ssh/id_rsa}`
 
 ### Building  
 

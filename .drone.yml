@@ -13,6 +13,7 @@ pipeline:
     image: node:10-alpine
     privileged: true
     commands:
+      - apk add --no-cache git openssh-client ca-certificates
       - yarn install --prefer-offline
       - yarn build
       - yarn test
