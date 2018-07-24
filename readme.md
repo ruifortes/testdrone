@@ -5,7 +5,7 @@
   Activate this repo in drone interface set it to "trusted"
 
   These variables configure drone cli:  
-  `export DRONE_SERVER=http://rsf-drone.ddns.net`  
+  `export DRONE_SERVER=http://rsfdrone-github.ddns.net`  
   `export DRONE_TOKEN=paste-token-here`
   
 ## Create drone pipeline (.drone.yml)  
@@ -36,17 +36,13 @@
   
   Login in kubect then get secret for default service account:
 
-  you need to createa a clusterrolebinding to default service acount
+  you need to createa a clusterrolebinding to default service acount (the type kubernetes.io/service-account-token secret in default namespace)
   `kubectl create clusterrolebinding drone-cluster-admin --clusterrole=cluster-admin --serviceaccount=default:default`
 
 
-  get secret for default service account:
+  get secret of default service account:
 
-  `SECRET_NAME=$(kubectl get secrets | grep default | cut -f1 -d ' ')`
-
-  or
-
-  `SECRET_NAME=$(kubectl get secrets --namespace drone| grep default | cut -f1 -d ' ')`
+  `export SECRET_NAME=$(kubectl get secrets --namespace default | grep default | cut -f1 -d ' ')`
 
   then
 
