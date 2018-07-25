@@ -9,15 +9,24 @@ pipeline:
       - ./npm-packages-offline-cache
     volumes:
       - /tmp/cache:/cache
+  # ssh:
+  #   image: appleboy/drone-ssh
+  #   host: bitbucket.org
+  #   username: RuiFortes
+  #   port: 22
+  #   secrets: [ssh_key]
+  #   script:
+  #     - echo hello
+  #     - echo world
   ssh:
     image: appleboy/drone-ssh
-    host: bitbucket.org
-    username: RuiFortes
+    host: foo.com
+    username: root
+    password: 1234
     port: 22
-    secrets: [ssh_key]
     script:
       - echo hello
-      - echo world    
+      - echo world  
   install:
     image: node:10-alpine
     privileged: true
