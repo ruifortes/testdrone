@@ -23,6 +23,7 @@ pipeline:
       - yarn install --prefer-offline
       - yarn build
       - yarn test
+    secrets: [ssh_key]
     when:
       event: [push, pull_request, tag]
   build-server:
