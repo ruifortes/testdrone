@@ -9,11 +9,18 @@ pipeline:
       - ./npm-packages-offline-cache
     volumes:
       - /tmp/cache:/cache
+  ssh:
+    image: appleboy/drone-ssh
+    host: bitbucket.org
+    # username: root
+    # port: 22
+    secrets: [ssh_key]
   install:
     image: node:10-alpine
     privileged: true
     commands:
       - apk add --no-cache git openssh-client ca-certificates
+      # - ssh-add <(echo "$SSH_KEY")
       - yarn install --prefer-offline
       - yarn build
       - yarn test
