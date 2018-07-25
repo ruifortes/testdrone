@@ -13,6 +13,7 @@
 ### Installing dependencies
 
   add `apk add --no-cache git openssh-client ca-certificates` command in install step
+  
   `drone secret add ruifortes/testdrone ssh_key @/home/rsf/.ssh/id_rsa`
 
 ### Building  

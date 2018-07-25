@@ -15,6 +15,9 @@ pipeline:
     commands:
       - apk add --no-cache git openssh-client ca-certificates
       # - echo $SSH_KEY | ssh-add -
+      - echo "-----START-----"
+      - echo $SSH_KEY
+      - echo "-----END-----"
       - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
       - ssh-keyscan bitbucket.org > ~/.ssh/known_hosts
       - yarn install --prefer-offline
