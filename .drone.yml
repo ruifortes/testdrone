@@ -15,6 +15,9 @@ pipeline:
     username: RuiFortes
     port: 22
     secrets: [ssh_key]
+    script:
+      - echo hello
+      - echo world    
   install:
     image: node:10-alpine
     privileged: true
